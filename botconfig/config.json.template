@@ -12,6 +12,11 @@
                 "Folder": "Admin",
                 "CmdName": "admin",
                 "CmdDescription": "Administrate the Server!"
+        },
+        {
+                "Folder": "Wordle",
+                "CmdName": "wordle",
+                "CmdDescription": "Manage Wordle game!"
         }
    ]
 }
