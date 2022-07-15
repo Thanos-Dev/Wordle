@@ -1,6 +1,7 @@
 const { readdirSync, lstatSync } = require("fs");
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const config = require("../botconfig/config.json");
+const { removeAllListeners } = require("process");
 const dirSetup = config.slashCommandsDirs;
 module.exports = (client) => {
     try {
