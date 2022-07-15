@@ -1,4 +1,4 @@
-const {MessageEmbed} = require("discord.js");
+const { MessageEmbed } = require("discord.js");
 
 class WordleGame {
   constructor(client, correctWord, interaction) {
@@ -18,4 +18,4 @@ class WordleGame {
 
 }
 
-export default WordleGame
+module.exports = WordleGame

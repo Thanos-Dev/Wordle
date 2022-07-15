@@ -23,7 +23,8 @@ module.exports = {
 		//{"StringChoices": { name: "what_ping", description: "What Ping do you want to get?", required: true, choices: [["Bot", "botping"], ["Discord Api", "api"]] }}, //here the second array input MUST BE A STRING // TO USE IN THE CODE: interacton.getString("what_ping")
   ],
   instances: {},
-  run: async (client, interaction) => {
+
+  async run(client, interaction) {
     try{
 	    //console.log(interaction, StringOption)
 		
@@ -35,18 +36,17 @@ module.exports = {
 		const { guild, id } = member;
 
     if (!Object.keys(this.instances).includes(id)) {
-      this.instances[id] = new WordleGame()
-      const channel = ChannelOption && ["GUILD_PRIVATE_THREAD ", "GUILD_PUBLIC_THREAD ", "GUILD_NEWS_THREAD ", "GUILD_NEWS", "GUILD_TEXT"].includes(ChannelOption.type) ? ChannelOption : guild.channels.cache.get(channelId);
-      let embed = new MessageEmbed().setColor(EmbedColor ? EmbedColor : "BLURPLE")
-      .setTitle(String(EmbedTitle).substr(0, 256))
-      .setDescription(String(EmbedDescription).substr(0, 2048).split("+n+").join("\n"))
-      .setFooter(guild.name, guild.iconURL({dynamic: true}));
+      this.instances[id] = new WordleGame(client, "among", interaction)
+      const channel = guild.channels.cache.get(channelId);
+      let embed = new MessageEmbed()
+        .setTitle("New Wordle game")
+        .setDescription("Important information here")
       //update it without a response!
-      await interaction.reply({content: `Sending the Embed...`, ephemeral: true}); 
+      await interaction.reply({content: `Processing...`, ephemeral: true}); 
       //SEND THE EMBED!
       await channel.send({embeds: [embed]});
       //Edit the reply
-      interaction.editReply({content: `✅ Embed sent!`, ephemeral: true}); 
+      interaction.editReply({content: `✅ Game Started!`, ephemeral: true}); 
     }
     } catch (e) {
         console.log(String(e.stack).bgRed)
