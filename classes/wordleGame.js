@@ -1,10 +1,10 @@
 const {MessageEmbed} = require("discord.js");
 
 class WordleGame {
-  constructor(client, correctWord, user) {
+  constructor(client, correctWord, interaction) {
     this.client = client
     this.correctWord = correctWord
-    this.user = user
+    this.user = interaction.member
   }
 
   validateWord(guess) {
