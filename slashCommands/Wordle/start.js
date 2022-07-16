@@ -1,4 +1,5 @@
-const { MessageEmbed, Collection } = require("discord.js");
+const { MessageEmbed, Collection, Client } = require("discord.js");
+const words = require("../../data/words.json")
 const config = require("../../botconfig/config.json");
 const ee = require("../../botconfig/embed.json");
 const settings = require("../../botconfig/settings.json");
@@ -22,7 +23,7 @@ module.exports = {
 		//{"IntChoices": { name: "what_ping", description: "What Ping do you want to get?", required: true, choices: [["Bot", 1], ["Discord Api", 2]] }}, //here the second array input MUST BE A NUMBER // TO USE IN THE CODE: interacton.getInteger("what_ping")
 		//{"StringChoices": { name: "what_ping", description: "What Ping do you want to get?", required: true, choices: [["Bot", "botping"], ["Discord Api", "api"]] }}, //here the second array input MUST BE A STRING // TO USE IN THE CODE: interacton.getString("what_ping")
   ],
-  instances: {},
+  words: [],
 
   async run(client, interaction) {
     try{
@@ -35,8 +36,9 @@ module.exports = {
 		} = interaction; 
 		const { guild, id } = member;
 
-    if (!Object.keys(this.instances).includes(id)) {
-      this.instances[id] = new WordleGame(client, "among", interaction)
+    if (!client.gameInstances.get(String(id))) {
+
+      client.gameInstances.set(String(id), new WordleGame(client, words[Math.floor(Math.random()*words.length)], interaction))
       const channel = guild.channels.cache.get(channelId);
       let embed = new MessageEmbed()
         .setTitle("New Wordle game")
