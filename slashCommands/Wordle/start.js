@@ -1,9 +1,7 @@
 const { MessageEmbed, Collection, Client } = require("discord.js");
 const words = require("../../data/words.json")
-const config = require("../../botconfig/config.json");
-const ee = require("../../botconfig/embed.json");
-const settings = require("../../botconfig/settings.json");
-const WordleGame = require("../../classes/wordleGame.js")
+const WordleGame = require("../../classes/wordleGame.js");
+
 module.exports = {
   name: "start", //the command name for the Slash Command
   description: "Start a Wordle game", //the command description for Slash Command Overview
@@ -35,20 +33,28 @@ module.exports = {
 				options, createdTimestamp 
 		} = interaction; 
 		const { guild, id } = member;
+    await interaction.reply({content: `Processing...`, ephemeral: true}); 
 
     if (!client.gameInstances.get(String(id))) {
 
       client.gameInstances.set(String(id), new WordleGame(client, words[Math.floor(Math.random()*words.length)], interaction))
       const channel = guild.channels.cache.get(channelId);
       let embed = new MessageEmbed()
-        .setTitle("New Wordle game")
-        .setDescription("Important information here")
-      //update it without a response!
-      await interaction.reply({content: `Processing...`, ephemeral: true}); 
+        .setTitle("Welcome to Wordle!")
+        .setColor("GREEN")
+  
+        .addField("What is Wordle?", "In Wordle, a 5 letter word is chosen for you to guess.")
+        .addField("How do you play?", "You have 7 guesses and with each guess, you will gain feedback. If the color of the emoji below your letter is gray, it means such letter does not exist in the word. If the color is orange, it means the letter does exist in the word, but not at that place. If the color is green, it means the letter does exist in the word at that exact place.")
+        .addField("How do I get started?", "To begin, just start typing words! You may exit at any time by writing \"quit\".")
+        .setFooter({text: "Made by YEEEEEEOOWWW AAAAAAHHHHHH#5143", iconURL: "https://cdn.discordapp.com/avatars/576777801013919744/8ec63e11e8273ec4409ab32d2be4ac79.webp?size=80"})
+
+        //update it without a response!
       //SEND THE EMBED!
       await channel.send({embeds: [embed]});
       //Edit the reply
       interaction.editReply({content: `✅ Game Started!`, ephemeral: true}); 
+    } else {
+      interaction.editReply({content: `❌ Game Already In Progress!`, ephemeral: true})
     }
     } catch (e) {
         console.log(String(e.stack).bgRed)
