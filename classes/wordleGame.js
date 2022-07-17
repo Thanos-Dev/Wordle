@@ -1,6 +1,8 @@
 const { MessageEmbed } = require("discord.js")
 const words = require("../data/words.json")
 
+const countLetterOccurances = (string, char) => (string.split(char).length - 1)
+
 class WordleGame {
   constructor(client, correctWord, interaction, baseGuesses) {
     this.client = client
@@ -17,9 +19,16 @@ class WordleGame {
     console.log(correctWord)
   }
 
-  validateLetter(char, index) {
+  validateLetter(char, index, guess) {
     if (char === this.correctWord[index]) return `:green_square:`
-    else if (this.correctWord.includes(char)) return `:yellow_square:`
+
+    else if (this.correctWord.includes(char)) {
+      if (countLetterOccurances(guess, char) > 1) {
+        if (this.correctWord.indexOf(char) === guess.indexOf(char)) return `:black_large_square:`
+      } else {
+        return `:yellow_square:`
+      }
+    }
 
     return `:black_large_square:`
   }
@@ -33,7 +42,7 @@ class WordleGame {
 
     this.embed = this.embed.addField(guess,
       `${Array.from(guess).map(letter => `:regional_indicator_${letter}:`).join('')}
-      ${Array.from(guess).map((letter, index) => this.validateLetter(letter, index)).join('')} `)
+      ${Array.from(guess).map((letter, index) => this.validateLetter(letter, index, guess)).join('')} `)
     
     this.guesses--
 
