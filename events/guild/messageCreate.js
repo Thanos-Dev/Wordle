@@ -22,6 +22,10 @@ module.exports = async (client, message) => {
         await message.reply(res)
       } else {
         await message.reply({ embeds: [res] })
+        if (res.fields[res.fields.length-1].value.includes(":green_square::green_square::green_square::green_square::green_square:")) {
+          await message.reply("Congratulations, you won!")
+          client.gameInstances.delete(memberId)
+        }
       }
     }
 

@@ -44,7 +44,7 @@ module.exports = {
         .setColor("GREEN")
   
         .addField("What is Wordle?", "In Wordle, a 5 letter word is chosen for you to guess.")
-        .addField("How do you play?", "You have 7 guesses and with each guess, you will gain feedback. If the color of the emoji below your letter is gray, it means such letter does not exist in the word. If the color is orange, it means the letter does exist in the word, but not at that place. If the color is green, it means the letter does exist in the word at that exact place.")
+        .addField("How do you play?", "You have 7 guesses and with each guess, you will gain feedback. If the color of the emoji below your letter is gray, it means such letter does not exist in the word. If the color is yellow, it means the letter does exist in the word, but not at that place. If the color is green, it means the letter does exist in the word at that exact place.")
         .addField("How do I get started?", "To begin, just start typing words! You may exit at any time by writing \"quit\".")
         .setFooter({text: "Made by YEEEEEEOOWWW AAAAAAHHHHHH#5143", iconURL: "https://cdn.discordapp.com/avatars/576777801013919744/8ec63e11e8273ec4409ab32d2be4ac79.webp?size=80"})
 
