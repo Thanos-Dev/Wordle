@@ -23,9 +23,12 @@ class WordleGame {
     if (char === this.correctWord[index]) return `:green_square:`
 
     else if (this.correctWord.includes(char)) {
-      if (countLetterOccurances(guess, char) > 1) {
-        if (this.correctWord.indexOf(char) === guess.indexOf(char)) return `:black_large_square:`
+      if (countLetterOccurances(this.correctWord, char) > 1) {
+        //tmp
+        return `:yellow_square:`
       } else {
+        const i = this.correctWord.indexOf(char)
+        if (guess[i] === char) return `:black_large_square:` 
         return `:yellow_square:`
       }
     }
