@@ -1,10 +1,11 @@
 {
-    "ownerIDS": ["442355791412854784"],
+    "ownerIDS": [],
     "default_cooldown_in_sec" : 1.5,
     "antiCrash": true,
     "ping_message": true,
     "delete_commands": true,
-    "somethingwentwrong_cmd": true,
+    "somethingwentwrong_cmd": false,
+    "quit_game_syntax": "!quit",
 
     "messages": {
         "ping_message": "To see all Commands type: `%{prefix}%help`",
@@ -24,7 +25,7 @@
         },
         "unknown_cmd": "❌ Unkown command, try: **`%{prefix}%help`**",
         "error_occur": "❌ An error occurred",
-        "error_occur_desc": "````%{errorstack}%````"
+        "error_occur_desc": "..."
     },
     "timeout": {
         "notallowed_to_exec_cmd": {

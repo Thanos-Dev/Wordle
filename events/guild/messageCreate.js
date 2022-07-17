@@ -8,6 +8,23 @@ module.exports = async (client, message) => {
     if(!message.guild || !message.channel || message.author.bot) return;
     if(message.channel.partial) await message.channel.fetch();
     if(message.partial) await message.fetch();
+
+    const memberId = String(message.member.id)
+    const gameInstance = client.gameInstances.get(memberId)
+
+    if (gameInstance) {
+      if (message.content === settings.quit_game_syntax) {
+        client.gameInstances.delete(memberId)
+        return
+      }
+      const res = gameInstance.validateWord(message.content)
+      if (typeof(res) === "string") {
+        await message.reply(res)
+      } else {
+        await message.reply({ embeds: [res] })
+      }
+    }
+
     const prefix = config.prefix;
     const prefixRegex = new RegExp(`^(<@!?${client.user.id}>|${escapeRegex(prefix)})`);
     if(!prefixRegex.test(message.content)) return;
@@ -131,15 +148,7 @@ module.exports = async (client, message) => {
             }).then(msg => {setTimeout(()=>{msg.delete().catch((e) => {console.log(String(e).grey)})}, 4000)}).catch((e) => {console.log(String(e).grey)});
           }
         }
-      } else //if the command is not found send an info msg
-        return message.reply({
-          embeds: [new Discord.MessageEmbed()
-            .setColor(ee.wrongcolor)
-            .setFooter(ee.footertext, ee.footericon)
-            .setTitle(replacemsg(settings.messages.unknown_cmd, {
-              prefix: prefix
-            }))]
-        }).then(msg => {setTimeout(()=>{msg.delete().catch((e) => {console.log(String(e).grey)})}, 4000)}).catch((e) => {console.log(String(e).grey)});
+      }
 }
 /**
  * @INFO

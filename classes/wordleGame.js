@@ -20,14 +20,15 @@ class WordleGame {
   }
 
   validateWord(guess) {
-    if (guess.length != 5) return "Your guess must be 5 letters long!"
-    if (/^[a-z]+$/i.test(str).test(guess)) return "Your guess must only contain letters!"
+    console.log(guess, guess.length)
+    if (guess.length !== 5) return "Your guess must be 5 letters long!"
+    if (!(/^[a-z]+$/i.test(guess))) return "Your guess must only contain letters!"
 
-    this.embed = this.embed.addField(guess, 
+    this.embed = this.embed.addField(guess,
       `${Array.from(guess).map(letter => `:regional_indicator_${letter}:`)}
       ${Array.from(guess).map(letter => this.validateLetter(letter))}`)
 
-    return embed
+    return this.embed
   }
 
 }
