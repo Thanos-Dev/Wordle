@@ -37,7 +37,7 @@ module.exports = {
 
     if (!client.gameInstances.get(String(id))) {
 
-      client.gameInstances.set(String(id), new WordleGame(client, words[Math.floor(Math.random()*words.length)], interaction))
+      client.gameInstances.set(String(id), new WordleGame(client, words[Math.floor(Math.random()*words.length)], interaction, 7))
       const channel = guild.channels.cache.get(channelId);
       let embed = new MessageEmbed()
         .setTitle("Welcome to Wordle!")

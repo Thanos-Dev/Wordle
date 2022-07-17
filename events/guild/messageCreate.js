@@ -27,6 +27,10 @@ module.exports = async (client, message) => {
           client.gameInstances.delete(memberId)
         }
       }
+      if (client.gameInstances.get(memberId) && gameInstance.guesses === 0) { //if the player hasnt won and he's all out of guesses...
+        await message.reply(`You lost! The correct word was "${gameInstance.correctWord}"!`)
+        client.gameInstances.delete(memberId)
+      }
     }
 
     const prefix = config.prefix;
