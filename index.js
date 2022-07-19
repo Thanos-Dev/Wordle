@@ -5,22 +5,17 @@ const path = require('path');
 const fs = require('fs');
 
 const filesDir = path.join(__dirname, "botconfig")
-fs.readdir(filesDir, (err, files) => {
-  if (err) {
-    console.error(`There was a problem reading ${filesDir}! Report this problem on the github page!`)
+const files = fs.readdirSync(filesDir)
+
+if (!files.includes("config.json")) {
+  if (files.includes("config.json.template")) {
+    fs.rename("./botconfig/config.json.template", "./botconfig/config.json", console.error)
+    console.log("Only the config template file was found! Automatically renamed it to config.json for you!".bold.yellow)
+  } else {
+    console.error("No config files were found! Ensure you downloaded the correct version from the official github page!".bold.yellow)
     process.exit(1)
   }
-
-  if (!files.includes("config.json")) {
-    if (files.includes("config.json.template")) {
-      fs.rename("./botconfig/config.json.template", "./botconfig/config.json", console.error)
-      console.log("Only the config template file was found! Automatically renamed it to config.json for you!".bold.yellow)
-    } else {
-      console.error("No config files were found! Ensure you downloaded the correct version from the official github page!".bold.yellow)
-      process.exit(1)
-    }
-  }
-})
+}
 
 const config = require(`./botconfig/config.json`);
 
