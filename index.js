@@ -60,7 +60,7 @@ client.cooldowns = new Discord.Collection();
 client.slashCommands = new Discord.Collection();
 client.aliases = new Discord.Collection();
 client.gameInstances = new Discord.Collection();
-client.categories = require("fs").readdirSync(`./commands`);
+client.categories = "";
 //Require the Handlers                  Add the antiCrash file too, if its enabled
 ["events", "slashCommands", settings.antiCrash ? "antiCrash" : null]
     .filter(Boolean)
