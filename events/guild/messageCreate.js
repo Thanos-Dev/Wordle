@@ -15,6 +15,7 @@ module.exports = async (client, message) => {
     if (gameInstance) {
       if (message.content === settings.quit_game_syntax) {
         client.gameInstances.delete(memberId)
+        await message.reply("Successfully quit game!")
         return
       }
       const res = gameInstance.validateWord(message.content)
