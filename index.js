@@ -62,7 +62,7 @@ client.aliases = new Discord.Collection();
 client.gameInstances = new Discord.Collection();
 client.categories = require("fs").readdirSync(`./commands`);
 //Require the Handlers                  Add the antiCrash file too, if its enabled
-["events", "commands", "slashCommands", settings.antiCrash ? "antiCrash" : null]
+["events", "slashCommands", settings.antiCrash ? "antiCrash" : null]
     .filter(Boolean)
     .forEach(h => {
         require(`./handlers/${h}`)(client);
