@@ -45,7 +45,7 @@ class WordleGame {
 
     this.embed = this.embed.addField(guess,
       `${Array.from(guess).map(letter => `:regional_indicator_${letter}:`).join('')}
-      ${Array.from(guess).map((letter, index) => this.validateLetter(letter, index, guess)).join('')} `)
+${Array.from(guess).map((letter, index) => this.validateLetter(letter, index, guess)).join('')} `)
     
     this.guesses--
 
