@@ -12,7 +12,7 @@ module.exports = {
   options: [ //OPTIONAL OPTIONS, make the array empty / dont add this option if you don't need options!
 	//INFORMATIONS! You can add Options, but mind that the NAME MUST BE LOWERCASED! AND NO SPACES!!!, for the CHOCIES you need to add a array of arrays; [ ["",""] , ["",""] ] 
 		//{"Integer": { name: "ping_amount", description: "How many times do you want to ping?", required: true }}, //to use in the code: interacton.getInteger("ping_amount")
-		//{"String": { name: "title", description: "What should be the Embed title?", required: true }}, //to use in the code: interacton.getString("title")
+		{"StringChoices": { name: "difficulty", description: "How difficult do you want the game to be?", required: true, choices: [["Easy", 9], ["Normal", 6], ["Hard", 3], ["Impossible", 1]]}}, //to use in the code: interacton.getString("title")
 		//{"String": { name: "description", description: "What should be the Embed Description? [ +n+ = NewLine ]", required: true }}, //to use in the code: interacton.getString("description")
 		//{"String": { name: "color", description: "What should be the Embed Color?", required: false }}, //to use in the code: interacton.getString("color")
 		//{"User": { name: "ping_a_user", description: "To Ping a user lol", required: false }}, //to use in the code: interacton.getUser("ping_a_user")
@@ -37,14 +37,14 @@ module.exports = {
 
     if (!client.gameInstances.get(String(id))) {
 
-      client.gameInstances.set(String(id), new WordleGame(client, words[Math.floor(Math.random()*words.length)], interaction, 7))
+      client.gameInstances.set(String(id), new WordleGame(client, words[Math.floor(Math.random()*words.length)], interaction, interaction.options.getString("difficulty")))
       const channel = guild.channels.cache.get(channelId);
       let embed = new MessageEmbed()
         .setTitle("Welcome to Wordle!")
         .setColor("GREEN")
   
         .addField("What is Wordle?", "Wordle is a guessing game. A 5 letter word is chosen for you to guess.")
-        .addField("How do you play?", "You get 7 guesses and with each guess, you gain feedback. If the color of the emoji below your letter is gray, it means the letter does not exist in the word. If the color is yellow, it means the letter does exist in the word, but not at that place. If the color is green, it means the letter does exist in the word at that exact place.")
+        .addField("How do you play?", "You get a number of guesses (depending on which difficulty you choose) and with each guess, you gain feedback. If the color of the emoji below your letter is gray, it means the letter does not exist in the word. If the color is yellow, it means the letter does exist in the word, but not at that place. If the color is green, it means the letter does exist in the word at that exact place.")
         .addField("How do I get started?", "To begin, just start typing 5 letter words! You may exit at any time by writing \"!quit\".")
         .setFooter({text: "Made by YEEEEEEOOWWW AAAAAAHHHHHH#5143", iconURL: "https://cdn.discordapp.com/avatars/576777801013919744/8ec63e11e8273ec4409ab32d2be4ac79.webp?size=80"})
 
