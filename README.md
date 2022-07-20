@@ -1,5 +1,7 @@
 # Wordle Discord Bot
-W.I.P
+A bot imitating the popular 5 letter guessing game Wordle!
+Entirely Free and Open Source (see installation instructions below)
+Contact me on my profile for commissions!
 
 # Installation Process
 - `npm install`
