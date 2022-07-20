@@ -1,5 +1,5 @@
 const { MessageEmbed, Collection, Client } = require("discord.js");
-const words = require("../../data/words.json")
+const words = require("../../data/wordsToChoose.json")
 const WordleGame = require("../../classes/wordleGame.js");
 
 module.exports = {
